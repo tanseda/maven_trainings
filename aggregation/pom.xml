@@ -1,0 +1,50 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.mycompany.app</groupId>
+  <artifactId>my-app</artifactId>
+  <version>1</version>
+<packaging>pom</packaging>
+ 
+  <modules>
+    <module>my-module</module>
+  </modules>
+<profiles>
+    <profile>
+      <id>appserverConfig-dev</id>
+      <activation>
+        <property>
+          <name>env</name>
+          <value>dev</value>
+        </property>
+      </activation>
+      <properties>
+        <appserver.home>/path/to/dev/appserver</appserver.home>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>appserverConfig-dev-2</id>
+      <activation>
+        <property>
+          <name>env</name>
+          <value>dev-2</value>
+        </property>
+      </activation>
+      <properties>
+        <appserver.home>/path/to/another/dev/appserver2</appserver.home>
+      </properties>
+    </profile>
+  </profiles>
+<build>
+    <plugins>
+      <plugin>
+        <groupId>org.myco.plugins</groupId>
+        <artifactId>spiffy-integrationTest-plugin</artifactId>
+        <version>1.0</version>
+        <configuration>
+          <appserverHome>${appserver.home}</appserverHome>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
